@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "https://github.com/AndreyLebedev1998/admin-grpc/admin";
+
+message TelegramToken {
+    int64 id = 1;
+    string token = 2;
+}
+
+message Empty {}
+
+service AuthService {
+    rpc GetTelegramToken(Empty) returns (TelegramToken);
+}
