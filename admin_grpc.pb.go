@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AdminService_GetTelegramToken_FullMethodName = "/admin.AdminService/GetTelegramToken"
+	AdminService_GetTelegramToken_FullMethodName           = "/admin.AdminService/GetTelegramToken"
+	AdminService_GetDataFromConnectionEmail_FullMethodName = "/admin.AdminService/GetDataFromConnectionEmail"
 )
 
 // AdminServiceClient is the client API for AdminService service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AdminServiceClient interface {
 	GetTelegramToken(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*TelegramToken, error)
+	GetDataFromConnectionEmail(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*DataFromConnEmail, error)
 }
 
 type adminServiceClient struct {
@@ -47,11 +49,22 @@ func (c *adminServiceClient) GetTelegramToken(ctx context.Context, in *Empty, op
 	return out, nil
 }
 
+func (c *adminServiceClient) GetDataFromConnectionEmail(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*DataFromConnEmail, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DataFromConnEmail)
+	err := c.cc.Invoke(ctx, AdminService_GetDataFromConnectionEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AdminServiceServer is the server API for AdminService service.
 // All implementations must embed UnimplementedAdminServiceServer
 // for forward compatibility.
 type AdminServiceServer interface {
 	GetTelegramToken(context.Context, *Empty) (*TelegramToken, error)
+	GetDataFromConnectionEmail(context.Context, *Empty) (*DataFromConnEmail, error)
 	mustEmbedUnimplementedAdminServiceServer()
 }
 
@@ -64,6 +77,9 @@ type UnimplementedAdminServiceServer struct{}
 
 func (UnimplementedAdminServiceServer) GetTelegramToken(context.Context, *Empty) (*TelegramToken, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetTelegramToken not implemented")
+}
+func (UnimplementedAdminServiceServer) GetDataFromConnectionEmail(context.Context, *Empty) (*DataFromConnEmail, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDataFromConnectionEmail not implemented")
 }
 func (UnimplementedAdminServiceServer) mustEmbedUnimplementedAdminServiceServer() {}
 func (UnimplementedAdminServiceServer) testEmbeddedByValue()                      {}
@@ -104,6 +120,24 @@ func _AdminService_GetTelegramToken_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AdminService_GetDataFromConnectionEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServiceServer).GetDataFromConnectionEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AdminService_GetDataFromConnectionEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServiceServer).GetDataFromConnectionEmail(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AdminService_ServiceDesc is the grpc.ServiceDesc for AdminService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +148,10 @@ var AdminService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTelegramToken",
 			Handler:    _AdminService_GetTelegramToken_Handler,
+		},
+		{
+			MethodName: "GetDataFromConnectionEmail",
+			Handler:    _AdminService_GetDataFromConnectionEmail_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

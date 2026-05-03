@@ -73,6 +73,58 @@ func (x *TelegramToken) GetToken() string {
 	return ""
 }
 
+type DataFromConnEmail struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Password      string                 `protobuf:"bytes,1,opt,name=password,proto3" json:"password,omitempty"`
+	SenderEmail   string                 `protobuf:"bytes,2,opt,name=sender_email,json=senderEmail,proto3" json:"sender_email,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DataFromConnEmail) Reset() {
+	*x = DataFromConnEmail{}
+	mi := &file_admin_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DataFromConnEmail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DataFromConnEmail) ProtoMessage() {}
+
+func (x *DataFromConnEmail) ProtoReflect() protoreflect.Message {
+	mi := &file_admin_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DataFromConnEmail.ProtoReflect.Descriptor instead.
+func (*DataFromConnEmail) Descriptor() ([]byte, []int) {
+	return file_admin_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *DataFromConnEmail) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *DataFromConnEmail) GetSenderEmail() string {
+	if x != nil {
+		return x.SenderEmail
+	}
+	return ""
+}
+
 type Empty struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -81,7 +133,7 @@ type Empty struct {
 
 func (x *Empty) Reset() {
 	*x = Empty{}
-	mi := &file_admin_proto_msgTypes[1]
+	mi := &file_admin_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -93,7 +145,7 @@ func (x *Empty) String() string {
 func (*Empty) ProtoMessage() {}
 
 func (x *Empty) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[1]
+	mi := &file_admin_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -106,7 +158,7 @@ func (x *Empty) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Empty.ProtoReflect.Descriptor instead.
 func (*Empty) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{1}
+	return file_admin_proto_rawDescGZIP(), []int{2}
 }
 
 var File_admin_proto protoreflect.FileDescriptor
@@ -116,10 +168,14 @@ const file_admin_proto_rawDesc = "" +
 	"\vadmin.proto\x12\x05admin\"5\n" +
 	"\rTelegramToken\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
-	"\x05token\x18\x02 \x01(\tR\x05token\"\a\n" +
-	"\x05Empty2F\n" +
+	"\x05token\x18\x02 \x01(\tR\x05token\"R\n" +
+	"\x11DataFromConnEmail\x12\x1a\n" +
+	"\bpassword\x18\x01 \x01(\tR\bpassword\x12!\n" +
+	"\fsender_email\x18\x02 \x01(\tR\vsenderEmail\"\a\n" +
+	"\x05Empty2\x8c\x01\n" +
 	"\fAdminService\x126\n" +
-	"\x10GetTelegramToken\x12\f.admin.Empty\x1a\x14.admin.TelegramTokenB7Z5https://github.com/AndreyLebedev1998/admin-grpc/adminb\x06proto3"
+	"\x10GetTelegramToken\x12\f.admin.Empty\x1a\x14.admin.TelegramToken\x12D\n" +
+	"\x1aGetDataFromConnectionEmail\x12\f.admin.Empty\x1a\x18.admin.DataFromConnEmailB7Z5https://github.com/AndreyLebedev1998/admin-grpc/adminb\x06proto3"
 
 var (
 	file_admin_proto_rawDescOnce sync.Once
@@ -133,16 +189,19 @@ func file_admin_proto_rawDescGZIP() []byte {
 	return file_admin_proto_rawDescData
 }
 
-var file_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_admin_proto_goTypes = []any{
-	(*TelegramToken)(nil), // 0: admin.TelegramToken
-	(*Empty)(nil),         // 1: admin.Empty
+	(*TelegramToken)(nil),     // 0: admin.TelegramToken
+	(*DataFromConnEmail)(nil), // 1: admin.DataFromConnEmail
+	(*Empty)(nil),             // 2: admin.Empty
 }
 var file_admin_proto_depIdxs = []int32{
-	1, // 0: admin.AdminService.GetTelegramToken:input_type -> admin.Empty
-	0, // 1: admin.AdminService.GetTelegramToken:output_type -> admin.TelegramToken
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	2, // 0: admin.AdminService.GetTelegramToken:input_type -> admin.Empty
+	2, // 1: admin.AdminService.GetDataFromConnectionEmail:input_type -> admin.Empty
+	0, // 2: admin.AdminService.GetTelegramToken:output_type -> admin.TelegramToken
+	1, // 3: admin.AdminService.GetDataFromConnectionEmail:output_type -> admin.DataFromConnEmail
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -159,7 +218,7 @@ func file_admin_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_admin_proto_rawDesc), len(file_admin_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
