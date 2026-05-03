@@ -19,101 +19,101 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AuthService_GetTelegramToken_FullMethodName = "/auth.AuthService/GetTelegramToken"
+	AdminService_GetTelegramToken_FullMethodName = "/admin.AdminService/GetTelegramToken"
 )
 
-// AuthServiceClient is the client API for AuthService service.
+// AdminServiceClient is the client API for AdminService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type AuthServiceClient interface {
+type AdminServiceClient interface {
 	GetTelegramToken(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*TelegramToken, error)
 }
 
-type authServiceClient struct {
+type adminServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewAuthServiceClient(cc grpc.ClientConnInterface) AuthServiceClient {
-	return &authServiceClient{cc}
+func NewAdminServiceClient(cc grpc.ClientConnInterface) AdminServiceClient {
+	return &adminServiceClient{cc}
 }
 
-func (c *authServiceClient) GetTelegramToken(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*TelegramToken, error) {
+func (c *adminServiceClient) GetTelegramToken(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*TelegramToken, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TelegramToken)
-	err := c.cc.Invoke(ctx, AuthService_GetTelegramToken_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AdminService_GetTelegramToken_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// AuthServiceServer is the server API for AuthService service.
-// All implementations must embed UnimplementedAuthServiceServer
+// AdminServiceServer is the server API for AdminService service.
+// All implementations must embed UnimplementedAdminServiceServer
 // for forward compatibility.
-type AuthServiceServer interface {
+type AdminServiceServer interface {
 	GetTelegramToken(context.Context, *Empty) (*TelegramToken, error)
-	mustEmbedUnimplementedAuthServiceServer()
+	mustEmbedUnimplementedAdminServiceServer()
 }
 
-// UnimplementedAuthServiceServer must be embedded to have
+// UnimplementedAdminServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedAuthServiceServer struct{}
+type UnimplementedAdminServiceServer struct{}
 
-func (UnimplementedAuthServiceServer) GetTelegramToken(context.Context, *Empty) (*TelegramToken, error) {
+func (UnimplementedAdminServiceServer) GetTelegramToken(context.Context, *Empty) (*TelegramToken, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetTelegramToken not implemented")
 }
-func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
-func (UnimplementedAuthServiceServer) testEmbeddedByValue()                     {}
+func (UnimplementedAdminServiceServer) mustEmbedUnimplementedAdminServiceServer() {}
+func (UnimplementedAdminServiceServer) testEmbeddedByValue()                      {}
 
-// UnsafeAuthServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to AuthServiceServer will
+// UnsafeAdminServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AdminServiceServer will
 // result in compilation errors.
-type UnsafeAuthServiceServer interface {
-	mustEmbedUnimplementedAuthServiceServer()
+type UnsafeAdminServiceServer interface {
+	mustEmbedUnimplementedAdminServiceServer()
 }
 
-func RegisterAuthServiceServer(s grpc.ServiceRegistrar, srv AuthServiceServer) {
-	// If the following call panics, it indicates UnimplementedAuthServiceServer was
+func RegisterAdminServiceServer(s grpc.ServiceRegistrar, srv AdminServiceServer) {
+	// If the following call panics, it indicates UnimplementedAdminServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&AuthService_ServiceDesc, srv)
+	s.RegisterService(&AdminService_ServiceDesc, srv)
 }
 
-func _AuthService_GetTelegramToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AdminService_GetTelegramToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServiceServer).GetTelegramToken(ctx, in)
+		return srv.(AdminServiceServer).GetTelegramToken(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthService_GetTelegramToken_FullMethodName,
+		FullMethod: AdminService_GetTelegramToken_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).GetTelegramToken(ctx, req.(*Empty))
+		return srv.(AdminServiceServer).GetTelegramToken(ctx, req.(*Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// AuthService_ServiceDesc is the grpc.ServiceDesc for AuthService service.
+// AdminService_ServiceDesc is the grpc.ServiceDesc for AdminService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var AuthService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "auth.AuthService",
-	HandlerType: (*AuthServiceServer)(nil),
+var AdminService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "admin.AdminService",
+	HandlerType: (*AdminServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GetTelegramToken",
-			Handler:    _AuthService_GetTelegramToken_Handler,
+			Handler:    _AdminService_GetTelegramToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

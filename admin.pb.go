@@ -113,13 +113,13 @@ var File_admin_proto protoreflect.FileDescriptor
 
 const file_admin_proto_rawDesc = "" +
 	"\n" +
-	"\vadmin.proto\x12\x04auth\"5\n" +
+	"\vadmin.proto\x12\x05admin\"5\n" +
 	"\rTelegramToken\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\"\a\n" +
-	"\x05Empty2C\n" +
-	"\vAuthService\x124\n" +
-	"\x10GetTelegramToken\x12\v.auth.Empty\x1a\x13.auth.TelegramTokenB7Z5https://github.com/AndreyLebedev1998/admin-grpc/adminb\x06proto3"
+	"\x05Empty2F\n" +
+	"\fAdminService\x126\n" +
+	"\x10GetTelegramToken\x12\f.admin.Empty\x1a\x14.admin.TelegramTokenB7Z5https://github.com/AndreyLebedev1998/admin-grpc/adminb\x06proto3"
 
 var (
 	file_admin_proto_rawDescOnce sync.Once
@@ -135,12 +135,12 @@ func file_admin_proto_rawDescGZIP() []byte {
 
 var file_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_admin_proto_goTypes = []any{
-	(*TelegramToken)(nil), // 0: auth.TelegramToken
-	(*Empty)(nil),         // 1: auth.Empty
+	(*TelegramToken)(nil), // 0: admin.TelegramToken
+	(*Empty)(nil),         // 1: admin.Empty
 }
 var file_admin_proto_depIdxs = []int32{
-	1, // 0: auth.AuthService.GetTelegramToken:input_type -> auth.Empty
-	0, // 1: auth.AuthService.GetTelegramToken:output_type -> auth.TelegramToken
+	1, // 0: admin.AdminService.GetTelegramToken:input_type -> admin.Empty
+	0, // 1: admin.AdminService.GetTelegramToken:output_type -> admin.TelegramToken
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
